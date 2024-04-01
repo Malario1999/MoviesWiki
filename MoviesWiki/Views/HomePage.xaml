@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MoviesWiki.Views.HomePage">
+             x:Class="MoviesWiki.Views.HomePage"
+             xmlns:local="clr-namespace:MoviesWiki.Views"
+             xmlns:behavior="clr-namespace:MoviesWiki.Behaviors">
 
     <Grid BackgroundColor="#0D0118" RowDefinitions=".05*,.1*,.45*,.05*,.3*">
 
@@ -18,15 +20,23 @@
                 VerticalOptions="Center"/>
         </Grid>
         <Label
+            
             Grid.Row="2"
             Text="Trending"
             TextColor="White"
             HorizontalOptions="Center"
             FontSize="18"/>
-        <CarouselView Grid.Row="2" ItemsSource="{Binding trending}">
+        <CarouselView Grid.Row="2" ItemsSource="{Binding trending}" PeekAreaInsets="80" IndicatorView="indicatorView">
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout 
+                    ItemSpacing="0"
+                    Orientation="Horizontal"
+                    SnapPointsAlignment="Center"
+                    SnapPointsType="MandatorySingle"/>
+            </CarouselView.ItemsLayout>
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Grid RowDefinitions=".2*, .6*, .2*">
+                    <Grid>
                         <Border
                             Grid.RowSpan="3"
                             BackgroundColor="#311B45"
@@ -35,7 +45,26 @@
                             StrokeShape="RoundRectangle 30, 30, 30, 30"
                             StrokeThickness="2"
                             WidthRequest="200">
-                            <Image Aspect="AspectFill"  Source="{Binding Image}"/>
+                            <Grid RowDefinitions=".2*, .6*, .2*">
+                                <Image Aspect="AspectFill"  Source="{Binding Image}" Grid.RowSpan="3" />
+                                <RoundRectangle
+                                    Grid.RowSpan="3"
+                                    CornerRadius="30"
+                                    HeightRequest="290"
+                                    WidthRequest="200"
+                                    Opacity=".7">
+                                    <RoundRectangle.Fill>
+                                        <LinearGradientBrush EndPoint="0,1">
+                                            <GradientStop Offset="0" Color="Transparent"/>
+                                            <GradientStop Offset="1" Color="#030005"/>
+                                        </LinearGradientBrush>
+                                    </RoundRectangle.Fill>
+                                </RoundRectangle>
+                                <VerticalStackLayout Grid.Row="2" Margin="10,0">
+                                    <Label Text="{Binding ReleaseYear}" TextColor="White" FontSize="Small"/>
+                                    <local:AutoResizeLabel Text="{Binding Title}" TextColor="white" LineBreakMode="TailTruncation" FontSize="20"/>
+                                </VerticalStackLayout>
+                            </Grid>
                             <Border.Shadow>
                                 <Shadow
                                     Brush="#C283FD"
@@ -43,10 +72,20 @@
                                     Radius="30"
                                     Offset="0,0"/>
                             </Border.Shadow>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_BorderTapped"/>
+                            </Border.GestureRecognizers>
                         </Border>
                     </Grid>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
+        <IndicatorView
+            x:Name="indicatorView"
+            Grid.Row="3"
+            HorizontalOptions="Center"
+            IndicatorColor="#616161"
+            IndicatorSize="8"
+            VerticalOptions="Center"/>
     </Grid>
 </ContentPage>

@@ -1,9 +1,13 @@
-namespace MoviesWiki.Views;
+using MoviesWiki.Models;
 
-public partial class MoviePage : ContentPage
+namespace MoviesWiki.Views
 {
-	public MoviePage()
-	{
-		InitializeComponent();
-	}
+    public partial class MoviePage : ContentPage
+    {
+        public MoviePage(Movie movie)
+        {
+            InitializeComponent();
+            BindingContext = movie;
+        }
+    }
 }
