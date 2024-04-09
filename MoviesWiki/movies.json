@@ -1,0 +1,41 @@
+﻿{
+  "movies": [
+    {
+      "Title": "Inception",
+      "Description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
+      "Id": 1,
+      "Image": "Inception.jpg",
+      "PlatformIcons": [ "netflix.jpg" ],
+      "ReleaseYear": "2010",
+      "Trending": true
+
+    },
+    {
+      "Title": "Cinderella",
+      "Id": 2,
+      "ReleaseYear": "2015",
+      "PlatformIcons": [ "hbo.jpg" ],
+      "Image": "cinderella.jpg",
+      "Description": "When her father unexpectedly dies, young Ella finds herself at the mercy of her cruel stepmother and her scheming stepsisters. Never one to give up hope, Ella's fortunes begin to change after meeting a dashing stranger.",
+      "Trending": true
+    },
+    {
+      "Title": "No Country for Old Men",
+      "Id": 3,
+      "ReleaseYear": "2007",
+      "PlatformIcons": [ "hbo.jpg" ],
+      "Image": "no_country_for_old_men.jpg",
+      "Description": "Violence and mayhem ensue after a hunter stumbles upon the aftermath of a drug deal gone wrong and over two million dollars in cash near the Rio Grande.",
+      "Trending": true
+    },
+    {
+      "Title": "There Will Be Blood",
+      "Id": 4,
+      "ReleaseYear": "2007",
+      "Image": "there_will_be_blood.jpg",
+      "PlatformIcons": [ "netflix.jpg" ],
+      "Description": "A story of family, religion, hatred, oil and madness, focusing on a turn-of-the-century prospector in the early days of the business.",
+      "Trending": true
+    }
+  ]
+}

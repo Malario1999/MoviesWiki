@@ -14,5 +14,6 @@ namespace MoviesWiki.Models
         public string Image { get; set; }
         public string ReleaseYear { get; set; }
         public List<string> PlatformIcons { get; set;}
+        public bool Trending { get; set; }
     }
 }

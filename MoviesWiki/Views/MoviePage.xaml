@@ -2,9 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MoviesWiki.Views.MoviePage"
-             Title="MoviePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding Title}"/>
-    </VerticalStackLayout>
+             Title="{Binding Title}">
+    <Grid RowDefinitions="7*, 1.2*, 2*"  BackgroundColor="#0D0118">
+        <Border
+            Margin="0,50,0,0"
+            Grid.Row="0"
+            BackgroundColor="#311B45"
+            HeightRequest="435"
+            Stroke="#6E557C"
+            StrokeShape="RoundRectangle 30, 30, 30, 30"
+            StrokeThickness="2"
+            WidthRequest="300">
+            <Image Aspect="AspectFill"  Source="{Binding Image}" Grid.RowSpan="3" />
+            <Border.Shadow>
+                <Shadow
+                        Brush="#C283FD"
+                        Opacity=".5"
+                        Radius="30"
+                        Offset="0,0"/>
+            </Border.Shadow>
+        </Border>
+        <VerticalStackLayout Grid.Row="1" Spacing="20" Padding="20">
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Title: " FontAttributes="Bold" TextColor="White"/>
+                        <Span Text="{Binding Title}" TextColor="White"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Year: " FontAttributes="Bold" TextColor="White"/>
+                        <Span Text="{Binding ReleaseYear}" TextColor="White"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </VerticalStackLayout>
+        <Label Text="{Binding Description}" Grid.Row="2" TextColor="White" Padding="20" FontSize="14"/>
+    </Grid>
 </ContentPage>

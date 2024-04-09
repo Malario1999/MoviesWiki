@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using MoviesWiki.Models;
 using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
+using Microsoft.UI.Input;
 
 namespace MoviesWiki.Views
 
@@ -10,17 +12,74 @@ namespace MoviesWiki.Views
         public HomePage()
         {
             InitializeComponent();
+            
+
             BindingContext = new Home();
+
+            List<Movie> fuck = new List<Movie>() { new Movie() { Title="fuckface" } };
+            resultsList.ItemsSource = fuck;
+            
+            
+        }
+
+        protected override void OnAppearing()
+        {
+            searchBar.Text = string.Empty;
+            resultsList.ItemsSource = null;
+            base.OnAppearing();
+            
         }
 
         private async void TapGestureRecognizer_BorderTapped(object sender, TappedEventArgs e)
         {
             var movie = (sender as Element).BindingContext as Movie;
             await Navigation.PushAsync(new MoviePage(movie));
-
+            
 
         }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+          
+          SearchBar searchBar = (SearchBar)sender;
+          var query = searchBar.Text;
+          if (query == "")
+            {
+                resultsList.ItemsSource = null;
+                resultsList.IsVisible = false ;
+                return;
+            }
+            resultsList.ItemsSource = (BindingContext as Home).allMovies.Where(movie => movie.Title.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+          resultsList.IsVisible = true;
+                
+
+        }
+
+        private void SearchBar_Focused(object sender, FocusEventArgs e)
+        {
+            if (resultsList.ItemsSource != null)
+            {
+                resultsList.IsVisible = true;
+            } else
+            {
+                resultsList.IsVisible = false;
+            }
+
+        }
+
+        private void SearchBar_Unfocused(object sender, FocusEventArgs e)
+        {
+            resultsList.IsVisible = false;
+        }
+
+        private async void resultsList_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var movie = (sender as ListView).SelectedItem as Movie;
+            await Navigation.PushAsync(new MoviePage(movie));
+        }
     }
+
+
 
     public class AutoResizeLabel : Label
     {

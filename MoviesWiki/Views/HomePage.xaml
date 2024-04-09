@@ -12,15 +12,29 @@
                 CornerRadius="25"
                 Fill="#311B45"
                 HeightRequest="45"/>
-            <SearchBar 
+            <SearchBar
+                x:Name="searchBar"
                 CancelButtonColor="White"
                 Placeholder="Search movie"
                 PlaceholderColor="#AC9DB9"
                 TextColor="White"
-                VerticalOptions="Center"/>
+                VerticalOptions="Center"
+                TextChanged="SearchBar_TextChanged"
+                Focused="SearchBar_Focused"
+                Unfocused="SearchBar_Unfocused"
+                />
         </Grid>
+        <Grid Grid.Row="2" Margin="0,-20,0,0" ZIndex="1">
+            <ListView  IsVisible="False" x:Name="resultsList" WidthRequest="330" BackgroundColor="#311B45" ItemTapped="resultsList_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Title}" TextColor="White"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        
         <Label
-            
             Grid.Row="2"
             Text="Trending"
             TextColor="White"
@@ -88,4 +102,5 @@
             IndicatorSize="8"
             VerticalOptions="Center"/>
     </Grid>
+    
 </ContentPage>
